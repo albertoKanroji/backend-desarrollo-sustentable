@@ -10,6 +10,7 @@ class EinarPrueba extends Component
     {
         $prueba=prueba::where('id',1) ->get();
         dd($prueba);
+        
         return view('livewire.einar-prueba');
     }
 }
