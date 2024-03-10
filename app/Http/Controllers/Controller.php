@@ -10,5 +10,7 @@ class Controller extends BaseController
 {
     
     use AuthorizesRequests, ValidatesRequests;
-    //hols
+    //hols+
+
+    //
 }
