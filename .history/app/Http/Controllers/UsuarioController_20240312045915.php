@@ -46,18 +46,10 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
 {
     try {
-        $usuario = Usuarios::findOrFail($id);
+        $usuario = Usuario::findOrFail($id);
+        $usuario->nombre_usuario = $request->nombre_usuario;
+        $usuario->correo_electronico = $request->correo_electronico;
         
-        // Verificar si se proporciona un nuevo nombre de usuario
-        if ($request->has('nombre_usuario')) {
-            $usuario->nombre_usuario = $request->nombre_usuario;
-        }
-
-        // Verificar si se proporciona un nuevo correo electrónico
-        if ($request->has('correo_electronico')) {
-            $usuario->correo_electronico = $request->correo_electronico;
-        }
-
         // Verificar si se proporciona una nueva contraseña
         if ($request->has('contrasena')) {
             $usuario->contrasena = Hash::make($request->contrasena);
@@ -69,7 +61,6 @@ class UsuarioController extends Controller
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
-
 
     public function destroy($id)
     {

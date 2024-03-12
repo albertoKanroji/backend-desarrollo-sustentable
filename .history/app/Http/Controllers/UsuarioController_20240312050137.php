@@ -46,7 +46,7 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
 {
     try {
-        $usuario = Usuarios::findOrFail($id);
+        $usuario = Usuario::findOrFail($id);
         
         // Verificar si se proporciona un nuevo nombre de usuario
         if ($request->has('nombre_usuario')) {
