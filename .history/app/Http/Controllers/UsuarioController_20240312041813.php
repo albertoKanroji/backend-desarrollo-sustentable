@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             return response()->json($usuario);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             $usuario->update($request->all());
             return response()->json($usuario, 200);
         } catch (\Exception $e) {
@@ -51,7 +51,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             $usuario->delete();
             return response()->json(null, 204);
         } catch (\Exception $e) {

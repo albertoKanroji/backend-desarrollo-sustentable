@@ -51,7 +51,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             $usuario->delete();
             return response()->json(null, 204);
         } catch (\Exception $e) {

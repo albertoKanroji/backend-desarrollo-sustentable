@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuarios;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
     public function index()
     {
         try {
-            $usuarios = Usuarios::all();
+            $usuarios = Usuario::all();
             return response()->json($usuarios);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -20,7 +20,7 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         try {
-            $usuario = Usuarios::create($request->all());
+            $usuario = Usuario::create($request->all());
             return response()->json($usuario, 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             return response()->json($usuario);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             $usuario->update($request->all());
             return response()->json($usuario, 200);
         } catch (\Exception $e) {
@@ -51,7 +51,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         try {
-            $usuario = Usuarios::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
             $usuario->delete();
             return response()->json(null, 204);
         } catch (\Exception $e) {
