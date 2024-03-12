@@ -24,7 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    
     Route::prefix('usuarios')->group(function () {
         Route::get('/listar', [UsuarioController::class, 'index'])->name('usuarios.listar');
         Route::post('/crear', [UsuarioController::class, 'store'])->name('usuarios.crear');
