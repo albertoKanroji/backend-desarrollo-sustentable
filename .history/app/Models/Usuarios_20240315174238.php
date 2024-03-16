@@ -12,5 +12,6 @@ class Usuarios extends Model
     protected $fillable = ['nombre_usuario', 'correo_electronico', 'contrasena'];
     public $timestamps = true;
 
-}
 
+    //hola mundo ccccccccccc uuuuuuuuutttttttttt
+}

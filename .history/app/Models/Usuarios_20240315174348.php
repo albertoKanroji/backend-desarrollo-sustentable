@@ -1,4 +1,4 @@
-<?php
+d<?php
 
 namespace App\Models;
 
@@ -13,4 +13,3 @@ class Usuarios extends Model
     public $timestamps = true;
 
 }
-

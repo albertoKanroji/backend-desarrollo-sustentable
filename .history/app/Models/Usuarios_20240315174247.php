@@ -13,4 +13,4 @@ class Usuarios extends Model
     public $timestamps = true;
 
 }
-
+r
