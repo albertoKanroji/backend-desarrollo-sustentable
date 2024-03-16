@@ -10,8 +10,6 @@ class ImagenDetalleCliente extends Model
     use HasFactory;
     protected $table = 'imagenDetalleClientes';
     protected $guarded = ['id'];
-    protected $fillable = ['imagenes_id', 'usuarios_clientes_id'];
-
 
     public function imagen()
     {

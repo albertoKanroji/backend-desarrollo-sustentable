@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comentario extends Model
+class Contacto extends Model
 {
     use HasFactory;
-    protected $table = 'comentarios';
+    protected $table = 'contacto';
     protected $guarded = ['id'];
-    protected $fillable = ['comentario', 'created_at', 'updated_at'];
-
 
     public function detalles()
     {
-        return $this->hasMany(ComentarioDetalle::class, 'comentarios_id');
+        return $this->hasMany(ContactoClientesDetalle::class, 'contacto_id');
     }
 }

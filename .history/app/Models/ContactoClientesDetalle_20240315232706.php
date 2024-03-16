@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImagenDetalleCliente extends Model
+class ContactoClientesDetalle extends Model
 {
     use HasFactory;
-    protected $table = 'imagenDetalleClientes';
+    protected $table = 'contactoClientesDetalle';
     protected $guarded = ['id'];
-    protected $fillable = ['imagenes_id', 'usuarios_clientes_id'];
 
-
-    public function imagen()
+    public function contacto()
     {
-        return $this->belongsTo(Imagen::class, 'imagenes_id');
+        return $this->belongsTo(Contacto::class, 'contacto_id');
     }
 
     public function cliente()

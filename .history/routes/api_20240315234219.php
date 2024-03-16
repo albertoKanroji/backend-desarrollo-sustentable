@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ComentarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +42,10 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('comentarios')->group(function () {
-        // Route::get('/listar', [ComentarioController::class, 'index'])->name('comentarios.listar');
-        // Route::post('/crear', [ComentarioController::class, 'store'])->name('comentarios.crear');
-        // Route::get('/mostrar/{id}', [ComentarioController::class, 'show'])->name('comentarios.mostrar');
-        // Route::put('/editar/{id}', [ComentarioController::class, 'update'])->name('comentarios.editar');
-        // Route::delete('/borrar/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.borrar');
+        Route::get('/listar', [ComentarioController::class, 'index'])->name('comentarios.listar');
+        Route::post('/crear', [ComentarioController::class, 'store'])->name('comentarios.crear');
+        Route::get('/mostrar/{id}', [ComentarioController::class, 'show'])->name('comentarios.mostrar');
+        Route::put('/editar/{id}', [ComentarioController::class, 'update'])->name('comentarios.editar');
+        Route::delete('/borrar/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.borrar');
     });
 });

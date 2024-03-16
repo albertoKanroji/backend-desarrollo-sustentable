@@ -10,8 +10,6 @@ class AccionesUsuario extends Model
     use HasFactory;
     protected $table = 'accionesUsuario';
     protected $guarded = ['id'];
-    protected $fillable = ['accion', 'created_at', 'updated_at', 'users_id'];
-
 
     public function user()
     {

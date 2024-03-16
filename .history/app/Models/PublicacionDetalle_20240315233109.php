@@ -10,8 +10,6 @@ class PublicacionDetalle extends Model
     use HasFactory;
     protected $table = 'publicacionDetalle';
     protected $guarded = ['id'];
-    protected $fillable = ['idUserAutor', 'created_at', 'updated_at', 'users_id', 'publicaciones_id'];
-
 
     public function user()
     {

@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ComentarioDetalle extends Model
+class AccionesUsuariosClientes extends Model
 {
     use HasFactory;
-    protected $table = 'comentarioDetalle';
+    protected $table = 'accionesUsuaruisClientes';
     protected $guarded = ['id'];
-    protected $fillable = ['created_at', 'updated_at', 'comentarios_id', 'usuariosClientes_id'];
-
-
-    public function comentario()
-    {
-        return $this->belongsTo(Comentario::class, 'comentarios_id');
-    }
 
     public function cliente()
     {

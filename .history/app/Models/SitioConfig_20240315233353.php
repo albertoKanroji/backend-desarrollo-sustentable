@@ -10,8 +10,6 @@ class SitioConfig extends Model
     use HasFactory;
     protected $table = 'sitioConfig';
     protected $guarded = ['id'];
-    protected $fillable = ['nombre'];
-
 
     public function imagenes()
     {

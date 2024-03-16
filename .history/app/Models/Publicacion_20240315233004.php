@@ -10,8 +10,6 @@ class Publicacion extends Model
     use HasFactory;
     protected $table = 'publicaciones';
     protected $guarded = ['id'];
-    protected $fillable = ['titulo', 'subTitulo', 'descripcion', 'created_at', 'updated_at', 'categoriasPublicaciones_id'];
-
 
     public function categoria()
     {

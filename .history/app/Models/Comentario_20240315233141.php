@@ -10,8 +10,6 @@ class Comentario extends Model
     use HasFactory;
     protected $table = 'comentarios';
     protected $guarded = ['id'];
-    protected $fillable = ['comentario', 'created_at', 'updated_at'];
-
 
     public function detalles()
     {
