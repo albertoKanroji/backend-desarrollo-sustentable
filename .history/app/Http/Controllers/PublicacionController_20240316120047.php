@@ -86,7 +86,7 @@ class PublicacionController extends Controller
     public function show($id)
     {
         try {
-            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->findOrFail($id);
+            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios.detalles'])->findOrFail($id);
             return response()->json([
                 'success' => true,
                 'status' => 200,

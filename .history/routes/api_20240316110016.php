@@ -4,9 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosClienteController;
 use App\Http\Controllers\PublicacionController;
-use App\Http\Controllers\CategoriaPublicacionController;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\ComentarioController;
 
 
 /*
@@ -46,30 +43,20 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [PublicacionController::class, 'destroy']); // Eliminar una publicación por su ID
     });
 
-    Route::prefix('categorias')->group(function () {
-        Route::get('/', [CategoriaPublicacionController::class, 'index']);
-        Route::post('/', [CategoriaPublicacionController::class, 'store']);
-        Route::get('/{id}', [CategoriaPublicacionController::class, 'show']);
-        Route::put('/{id}', [CategoriaPublicacionController::class, 'update']);
-        Route::delete('/{id}', [CategoriaPublicacionController::class, 'destroy']);
-    });
 
-
-    Route::prefix('tags')->group(function () {
-        Route::get('/', [TagController::class, 'index']); // Obtener todos los tags
-        Route::post('/', [TagController::class, 'store']); // Crear un nuevo tag
-        Route::get('/{id}', [TagController::class, 'show']); // Obtener un tag por su ID
-        Route::put('/{id}', [TagController::class, 'update']); // Actualizar un tag por su ID
-        Route::delete('/{id}', [TagController::class, 'destroy']); // Eliminar un tag por su ID
+    Route::prefix('posts')->group(function () {
+        // Route::get('/listar', [PostController::class, 'index'])->name('posts.listar');
+        // Route::post('/crear', [PostController::class, 'store'])->name('posts.crear');
+        // Route::get('/mostrar/{id}', [PostController::class, 'show'])->name('posts.mostrar');
+        // Route::put('/editar/{id}', [PostController::class, 'update'])->name('posts.editar');
+        // Route::delete('/borrar/{id}', [PostController::class, 'destroy'])->name('posts.borrar');
     });
 
     Route::prefix('comentarios')->group(function () {
-        Route::post('/', [ComentarioController::class, 'store']);
-        Route::get('/', [ComentarioController::class, 'index']);
-        Route::get('/{id}', [ComentarioController::class, 'show']);
-        Route::delete('/{id}', [ComentarioController::class, 'destroy']);
+        // Route::get('/listar', [ComentarioController::class, 'index'])->name('comentarios.listar');
+        // Route::post('/crear', [ComentarioController::class, 'store'])->name('comentarios.crear');
+        // Route::get('/mostrar/{id}', [ComentarioController::class, 'show'])->name('comentarios.mostrar');
+        // Route::put('/editar/{id}', [ComentarioController::class, 'update'])->name('comentarios.editar');
+        // Route::delete('/borrar/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.borrar');
     });
-
-
-
 });

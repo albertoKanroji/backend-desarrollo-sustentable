@@ -12,7 +12,7 @@ class PublicacionController extends Controller
     public function index()
     {
         try {
-            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->get();
+            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags'])->get();
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -86,7 +86,7 @@ class PublicacionController extends Controller
     public function show($id)
     {
         try {
-            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->findOrFail($id);
+            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags'])->findOrFail($id);
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -106,17 +106,14 @@ class PublicacionController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validar los datos de la solicitud
         $validator = Validator::make($request->all(), [
             'titulo' => 'required|string',
             'subTitulo' => 'required|string',
             'descripcion' => 'required|string',
             'categoriasPublicaciones_id' => 'required|integer|exists:categoriasPublicaciones,id',
-            'tags' => 'required|array',
-            'tags.*' => 'integer|exists:tags,id',
-            'users_id' => 'required'
+            'users_id' => 'required|integer|exists:users,id'
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -125,33 +122,40 @@ class PublicacionController extends Controller
                 'data' => $validator->errors()
             ], 422);
         }
-    
+
         try {
-            // Buscar la publicación a actualizar
             $publicacion = Publicacion::findOrFail($id);
-    
-            // Actualizar la publicación
             $publicacion->update($request->all());
-    
-            // Actualizar los tags de la publicación
-            $publicacion->tags()->sync($request->tags);
-    
+
+            $publicacionDetalle = PublicacionDetalle::where('publicaciones_id', $id)->first();
+            if (!$publicacionDetalle) {
+                return response()->json([
+                    'success' => false,
+                    'status' => 404,
+                    'message' => 'Detalle de publicación no encontrado',
+                    'data' => null
+                ], 404);
+            }
+            $publicacionDetalle->update([
+                'idUserAutor' => $request->idUserAutor,
+                'users_id' => $request->idUserAutor,
+            ]);
+
             return response()->json([
                 'success' => true,
                 'status' => 200,
                 'message' => 'Publicación actualizada correctamente',
                 'data' => $publicacion
             ]);
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'status' => 500,
-                'message' => 'Error al actualizar la publicación: ' . $e->getMessage(),
+                'message' => 'Error al actualizar publicación: ' . $e->getMessage(),
                 'data' => null
             ]);
         }
     }
-    
 
     public function destroy($id)
     {

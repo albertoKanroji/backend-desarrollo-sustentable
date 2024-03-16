@@ -6,7 +6,6 @@ use App\Http\Controllers\UsuariosClienteController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\CategoriaPublicacionController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\ComentarioController;
 
 
 /*
@@ -63,12 +62,12 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [TagController::class, 'destroy']); // Eliminar un tag por su ID
     });
 
-    Route::prefix('comentarios')->group(function () {
-        Route::post('/', [ComentarioController::class, 'store']);
-        Route::get('/', [ComentarioController::class, 'index']);
-        Route::get('/{id}', [ComentarioController::class, 'show']);
-        Route::delete('/{id}', [ComentarioController::class, 'destroy']);
-    });
+Route::prefix('comentarios')->group(function () {
+    Route::post('/', [ComentarioController::class, 'store']);
+    Route::get('/', [ComentarioController::class, 'index']);
+    Route::get('/{id}', [ComentarioController::class, 'show']);
+    Route::delete('/{id}', [ComentarioController::class, 'destroy']);
+});
 
 
 

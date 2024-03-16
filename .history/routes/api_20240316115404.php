@@ -63,12 +63,12 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [TagController::class, 'destroy']); // Eliminar un tag por su ID
     });
 
-    Route::prefix('comentarios')->group(function () {
-        Route::post('/', [ComentarioController::class, 'store']);
-        Route::get('/', [ComentarioController::class, 'index']);
-        Route::get('/{id}', [ComentarioController::class, 'show']);
-        Route::delete('/{id}', [ComentarioController::class, 'destroy']);
-    });
+Route::prefix('comentarios')->group(function () {
+    Route::post('/', [ComentarioController::class, 'store']);
+    Route::get('/', [ComentarioController::class, 'index']);
+    Route::get('/{id}', [ComentarioController::class, 'show']);
+    Route::delete('/{id}', [ComentarioController::class, 'destroy']);
+});
 
 
 

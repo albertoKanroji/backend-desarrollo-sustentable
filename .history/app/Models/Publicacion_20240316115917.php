@@ -35,6 +35,6 @@ class Publicacion extends Model
 
     public function comentarios()
     {
-        return $this->hasMany(ComentarioDetalle::class, 'publicacion_id')->with('comentario');
+        return $this->hasMany(ComentarioDetalle::class, 'publicacion_id');
     }
 }

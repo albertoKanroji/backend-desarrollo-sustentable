@@ -12,13 +12,7 @@ class UsuariosClienteController extends Controller
     public function index()
     {
         try {
-            $usuarios = UsuariosCliente::select(
-                'id',
-                'nombreCliente',
-                'usuarioApellidoPaterno',
-                'usuarioApellidoMaterno',
-                'usuarioEmail'
-            )->get();
+            $usuarios = UsuariosCliente::select('id', 'nombreCliente', 'usuarioApellidoPaterno', 'usuarioApellidoMaterno', 'usuarioEmail')->get();
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -65,16 +59,7 @@ class UsuariosClienteController extends Controller
                 'message' => 'Usuario creado correctamente',
                 'data' => $usuario
             ], 201);
-        } catch (\Illuminate\Database\QueryException $e) {
-            // Error de la base de datos
-            return response()->json([
-                'success' => false,
-                'status' => 500,
-                'message' => 'Error en la base de datos al crear usuario: ' . $e->getMessage(),
-                'data' => null
-            ]);
         } catch (\Exception $e) {
-            // Otro tipo de error
             return response()->json([
                 'success' => false,
                 'status' => 500,
@@ -83,7 +68,6 @@ class UsuariosClienteController extends Controller
             ]);
         }
     }
-
 
     public function login(Request $request)
     {
@@ -129,30 +113,24 @@ class UsuariosClienteController extends Controller
     }
 
     public function show($id)
-    {
-        try {
-            $usuario = UsuariosCliente::select(
-                'id',
-                'nombreCliente',
-                'usuarioApellidoPaterno',
-                'usuarioApellidoMaterno',
-                'usuarioEmail'
-            )->findOrFail($id);
-            return response()->json([
-                'success' => true,
-                'status' => 200,
-                'message' => 'Usuario encontrado',
-                'data' => $usuario
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'status' => 404,
-                'message' => 'Usuario no encontrado',
-                'data' => null
-            ], 404);
-        }
+{
+    try {
+        $usuario = UsuariosCliente::select('id', 'nombreCliente', 'usuarioApellidoPaterno', 'usuarioApellidoMaterno', 'usuarioEmail')->findOrFail($id);
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'message' => 'Usuario encontrado',
+            'data' => $usuario
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'status' => 404,
+            'message' => 'Usuario no encontrado',
+            'data' => null
+        ], 404);
     }
+}
 
     public function update(Request $request, $id)
     {

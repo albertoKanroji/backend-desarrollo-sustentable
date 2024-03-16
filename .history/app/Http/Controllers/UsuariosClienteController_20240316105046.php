@@ -37,52 +37,52 @@ class UsuariosClienteController extends Controller
 
 
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nombreCliente' => 'required|string',
-            'usuarioApellidoPaterno' => 'required|string',
-            'usuarioApellidoMaterno' => 'required|string',
-            'usuarioEmail' => 'required|email|unique:usuariosClientes',
-            'usuarioPassword' => 'required|string|min:6',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'nombreCliente' => 'required|string',
+        'usuarioApellidoPaterno' => 'required|string',
+        'usuarioApellidoMaterno' => 'required|string',
+        'usuarioEmail' => 'required|email|unique:usuariosClientes',
+        'usuarioPassword' => 'required|string|min:6',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'status' => 422,
-                'message' => 'Error de validación',
-                'data' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            $usuarioData = $request->all();
-            $usuarioData['usuarioPassword'] = Hash::make($request->usuarioPassword);
-            $usuario = UsuariosCliente::create($usuarioData);
-            return response()->json([
-                'success' => true,
-                'status' => 201,
-                'message' => 'Usuario creado correctamente',
-                'data' => $usuario
-            ], 201);
-        } catch (\Illuminate\Database\QueryException $e) {
-            // Error de la base de datos
-            return response()->json([
-                'success' => false,
-                'status' => 500,
-                'message' => 'Error en la base de datos al crear usuario: ' . $e->getMessage(),
-                'data' => null
-            ]);
-        } catch (\Exception $e) {
-            // Otro tipo de error
-            return response()->json([
-                'success' => false,
-                'status' => 500,
-                'message' => 'Error al crear usuario: ' . $e->getMessage(),
-                'data' => null
-            ]);
-        }
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'status' => 422,
+            'message' => 'Error de validación',
+            'data' => $validator->errors()
+        ], 422);
     }
+
+    try {
+        $usuarioData = $request->all();
+        $usuarioData['usuarioPassword'] = Hash::make($request->usuarioPassword);
+        $usuario = UsuariosCliente::create($usuarioData);
+        return response()->json([
+            'success' => true,
+            'status' => 201,
+            'message' => 'Usuario creado correctamente',
+            'data' => $usuario
+        ], 201);
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Error de la base de datos
+        return response()->json([
+            'success' => false,
+            'status' => 500,
+            'message' => 'Error en la base de datos al crear usuario: ' . $e->getMessage(),
+            'data' => null
+        ]);
+    } catch (\Exception $e) {
+        // Otro tipo de error
+        return response()->json([
+            'success' => false,
+            'status' => 500,
+            'message' => 'Error al crear usuario: ' . $e->getMessage(),
+            'data' => null
+        ]);
+    }
+}
 
 
     public function login(Request $request)

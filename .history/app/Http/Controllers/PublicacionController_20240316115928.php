@@ -12,7 +12,7 @@ class PublicacionController extends Controller
     public function index()
     {
         try {
-            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->get();
+            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags',])->get();
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -86,7 +86,7 @@ class PublicacionController extends Controller
     public function show($id)
     {
         try {
-            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->findOrFail($id);
+            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags'])->findOrFail($id);
             return response()->json([
                 'success' => true,
                 'status' => 200,

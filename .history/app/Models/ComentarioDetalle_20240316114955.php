@@ -14,7 +14,7 @@ class ComentarioDetalle extends Model
 
     public function publicacion()
     {
-        return $this->belongsTo(Publicacion::class, 'publicacion_id');
+        return $this->belongsTo(Comentario::class, 'comentarios_id');
     }
     public function comentario()
     {

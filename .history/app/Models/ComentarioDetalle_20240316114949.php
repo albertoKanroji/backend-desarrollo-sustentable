@@ -12,9 +12,9 @@ class ComentarioDetalle extends Model
     protected $guarded = ['id'];
     protected $fillable = ['created_at', 'updated_at', 'comentarios_id', 'usuariosClientes_id','publicacion_id'];
 
-    public function publicacion()
+    public function comentario()
     {
-        return $this->belongsTo(Publicacion::class, 'publicacion_id');
+        return $this->belongsTo(Comentario::class, 'comentarios_id');
     }
     public function comentario()
     {
