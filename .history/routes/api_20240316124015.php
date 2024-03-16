@@ -7,7 +7,6 @@ use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\CategoriaPublicacionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\ContactoController;
 
 
 /*

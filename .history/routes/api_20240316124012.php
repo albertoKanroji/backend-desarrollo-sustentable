@@ -7,7 +7,6 @@ use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\CategoriaPublicacionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\ContactoController;
 
 
 /*
@@ -70,6 +69,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}', [ComentarioController::class, 'show']);
         Route::delete('/{id}', [ComentarioController::class, 'destroy']);
     });
+    use App\Http\Controllers\ContactoController;
 
     Route::prefix('contacto')->group(function () {
         Route::post('/', [ContactoController::class, 'store']);
