@@ -39,6 +39,6 @@ class Publicacion extends Model
     }
     public function publicacionDetalles()
     {
-        return $this->hasMany(PublicacionDetalle::class, 'publicaciones_id');
+        return $this->belongsToMany(PublicacionDetalle::class, 'tagPublicacionDetalle', 'publicaciones_id', 'tags_id');
     }
 }

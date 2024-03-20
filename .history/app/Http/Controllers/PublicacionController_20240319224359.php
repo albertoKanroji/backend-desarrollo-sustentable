@@ -9,13 +9,12 @@ use App\Models\ComentarioDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
 class PublicacionController extends Controller
 {
     public function index()
     {
         try {
-            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags', 'comentarios'])->get();
+            $publicaciones = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->get();
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -31,7 +30,7 @@ class PublicacionController extends Controller
             ]);
         }
     }
-
+    
 
     public function store(Request $request)
     {
@@ -89,7 +88,7 @@ class PublicacionController extends Controller
     public function show($id)
     {
         try {
-            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags', 'comentarios'])->findOrFail($id);
+            $publicacion = Publicacion::with(['categoria', 'imagenes', 'usuarios', 'tags','comentarios'])->findOrFail($id);
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -105,7 +104,7 @@ class PublicacionController extends Controller
             ], 404);
         }
     }
-
+    
 
     public function update(Request $request, $id)
     {
@@ -119,7 +118,7 @@ class PublicacionController extends Controller
             'tags.*' => 'integer|exists:tags,id',
             'users_id' => 'required'
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -128,17 +127,17 @@ class PublicacionController extends Controller
                 'data' => $validator->errors()
             ], 422);
         }
-
+    
         try {
             // Buscar la publicación a actualizar
             $publicacion = Publicacion::findOrFail($id);
-
+    
             // Actualizar la publicación
             $publicacion->update($request->all());
-
+    
             // Actualizar los tags de la publicación
             $publicacion->tags()->sync($request->tags);
-
+    
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -154,35 +153,35 @@ class PublicacionController extends Controller
             ]);
         }
     }
-
+    
 
     public function destroy($id)
     {
         try {
             // Iniciar una transacción
             DB::beginTransaction();
-
+    
             // Encontrar la publicación
             $publicacion = Publicacion::findOrFail($id);
-
+    
             // Eliminar las imágenes relacionadas
             $publicacion->imagenes()->detach();
-
+    
             // Eliminar los comentarios y sus detalles
             $publicacion->comentarios()->each(function ($comentario) {
                 $comentario->detalle()->delete();
             });
             $publicacion->comentarios()->delete();
-
-                // Eliminar publicación detalles
-        $publicacion->publicacionDetalles()->delete();
-
+    
+            // Eliminar los detalles de la publicación
+            $publicacion->detalles()->delete();
+    
             // Finalmente, eliminar la publicación
             $publicacion->delete();
-
+    
             // Confirmar la transacción
             DB::commit();
-
+    
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -192,7 +191,7 @@ class PublicacionController extends Controller
         } catch (\Exception $e) {
             // Revertir la transacción en caso de error
             DB::rollback();
-
+    
             return response()->json([
                 'success' => false,
                 'status' => 500,
@@ -201,5 +200,5 @@ class PublicacionController extends Controller
             ]);
         }
     }
-
+    
 }

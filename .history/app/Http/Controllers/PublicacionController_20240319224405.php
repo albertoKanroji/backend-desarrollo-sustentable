@@ -174,8 +174,8 @@ class PublicacionController extends Controller
             });
             $publicacion->comentarios()->delete();
 
-                // Eliminar publicación detalles
-        $publicacion->publicacionDetalles()->delete();
+            // Eliminar los detalles de la publicación
+            $publicacion->detalles()->delete();
 
             // Finalmente, eliminar la publicación
             $publicacion->delete();

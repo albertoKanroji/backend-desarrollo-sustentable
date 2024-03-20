@@ -37,8 +37,4 @@ class Publicacion extends Model
     {
         return $this->hasMany(ComentarioDetalle::class, 'publicacion_id')->with('comentario');
     }
-    public function publicacionDetalles()
-    {
-        return $this->hasMany(PublicacionDetalle::class, 'publicaciones_id');
-    }
 }

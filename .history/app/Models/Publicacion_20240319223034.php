@@ -12,7 +12,18 @@ class Publicacion extends Model
     protected $guarded = ['id'];
     protected $fillable = ['titulo', 'subTitulo', 'descripcion', 'created_at', 'updated_at', 'categoriasPublicaciones_id'];
 
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::deleting(function ($publicacion) {
+            // Eliminar imágenes relacionadas
+            $publicacion->imagenes()->detach();
+
+            // Eliminar comentarios relacionados
+            $publicacion->comentarios()->delete();
+        });
+    }
     public function categoria()
     {
         return $this->belongsTo(CategoriaPublicacion::class, 'categoriasPublicaciones_id');
@@ -36,9 +47,5 @@ class Publicacion extends Model
     public function comentarios()
     {
         return $this->hasMany(ComentarioDetalle::class, 'publicacion_id')->with('comentario');
-    }
-    public function publicacionDetalles()
-    {
-        return $this->hasMany(PublicacionDetalle::class, 'publicaciones_id');
     }
 }
